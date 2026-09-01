@@ -26,7 +26,7 @@ export function useReveal<T extends HTMLElement = HTMLElement>() {
           observer.unobserve(el);
         }
       },
-      { threshold: 0.18, rootMargin: "0px 0px -8% 0px" },
+      { threshold: 0.01, rootMargin: "0px 0px -5% 0px" },
     );
 
     targets.forEach((el) => observer.observe(el));
