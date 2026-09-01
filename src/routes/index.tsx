@@ -1,24 +1,46 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useReveal } from "@/hooks/use-reveal";
+import { Nav } from "@/components/site/nav";
+import { Hero } from "@/components/site/hero";
+import { Services } from "@/components/site/services";
+import { VideoShowcase } from "@/components/site/video-showcase";
+import { BeforeAfter } from "@/components/site/before-after";
+import { Owner } from "@/components/site/owner";
+import { CallToAction, Footer } from "@/components/site/cta";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Prosper Roofing | Premium Roofing — Call 512-632-6878";
+const description =
+  "Prosper Roofing builds and restores roofs made for desert extremes. Owner Moses Caballero. Free roof inspection — call or text 512-632-6878.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  const ref = useReveal<HTMLDivElement>();
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div ref={ref} className="bg-background">
+      <Nav />
+      <main>
+        <Hero />
+        <Services />
+        <VideoShowcase />
+        <BeforeAfter />
+        <Owner />
+        <CallToAction />
+      </main>
+      <Footer />
     </div>
   );
 }
