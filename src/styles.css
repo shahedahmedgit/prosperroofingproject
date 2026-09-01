@@ -207,6 +207,8 @@
 }
 
 .hero-img { animation: hero-settle 1700ms var(--ease-cinema) both; }
-.hero-veil { animation: veil-in 1400ms var(--ease-cinema) 200ms both; }
+.hero-veil { opacity: 0.9; animation: veil-in 1400ms var(--ease-cinema) 200ms both; }
+.hero-veil { animation-name: veil-in-90; }
+@keyframes veil-in-90 { from { opacity: 0; } to { opacity: 0.9; } }
 .hero-line { display: block; animation: line-up 1100ms var(--ease-cinema) both; }
 .hero-rise { animation: rise-in 900ms var(--ease-cinema) both; }
