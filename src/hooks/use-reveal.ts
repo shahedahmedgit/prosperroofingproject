@@ -57,7 +57,11 @@ export function useReveal<T extends HTMLElement = HTMLElement>() {
       { threshold: 0, rootMargin: "0px 0px -5% 0px" },
     );
 
+    (window as any).__dbg = { observed: remaining.length, fired: 0, revealed: 0 };
+    const origCheck = check;
     remaining.forEach((el) => observer.observe(el));
+    const io2 = new IntersectionObserver((es) => { (window as any).__dbg.fired += es.length; es.forEach(e => origCheck(e.target as HTMLElement)); }, { threshold: 0, rootMargin: "0px 0px -5% 0px" });
+    remaining.forEach((el) => io2.observe(el));
     return () => observer.disconnect();
   }, []);
 
