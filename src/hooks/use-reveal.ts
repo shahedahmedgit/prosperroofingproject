@@ -38,16 +38,23 @@ export function useReveal<T extends HTMLElement = HTMLElement>() {
 
     if (remaining.length === 0) return;
 
+    const pending = new Set(remaining);
+    const check = (el: HTMLElement) => {
+      if (!pending.has(el)) return;
+      if (isInView(el)) {
+        pending.delete(el);
+        reveal(el);
+        observer.unobserve(el);
+      }
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          const el = entry.target as HTMLElement;
-          reveal(el);
-          observer.unobserve(el);
-        }
+        // Use geometry rather than isIntersecting: clip-path/opacity
+        // animations can suppress intersection events on some elements.
+        for (const entry of entries) check(entry.target as HTMLElement);
       },
-      { threshold: 0.01, rootMargin: "0px 0px -5% 0px" },
+      { threshold: 0, rootMargin: "0px 0px -5% 0px" },
     );
 
     remaining.forEach((el) => observer.observe(el));
