@@ -19,13 +19,13 @@ export function Hero() {
           Prosper Roofing
         </p>
 
-        <h1 className="mt-6 max-w-4xl text-[clamp(2.6rem,7.4vw,6.2rem)] font-bold">
-          <span className="block overflow-hidden">
+        <h1 className="mt-6 max-w-4xl text-[clamp(2.6rem,7.4vw,6.2rem)] leading-[1.05] font-bold">
+          <span className="block overflow-hidden leading-[1.05] pb-[0.12em] -mb-[0.12em]">
             <span className="hero-line" style={{ animationDelay: "600ms" }}>
               Roofs built for
             </span>
           </span>
-          <span className="block overflow-hidden">
+          <span className="block overflow-hidden leading-[1.05] pb-[0.12em]">
             <span className="hero-line" style={{ animationDelay: "740ms" }}>
               desert extremes.
             </span>
