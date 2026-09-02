@@ -16,6 +16,7 @@ export function useReveal<T extends HTMLElement = HTMLElement>() {
     const targets = Array.from(
       root.querySelectorAll<HTMLElement>("[data-reveal]"),
     );
+    (window as any).__dbg0 = { targets: targets.length, ih: window.innerHeight };
     if (targets.length === 0) return;
 
     const reveal = (el: HTMLElement) => {
@@ -36,6 +37,7 @@ export function useReveal<T extends HTMLElement = HTMLElement>() {
       else remaining.push(el);
     }
 
+    (window as any).__dbg1 = { remaining: remaining.length };
     if (remaining.length === 0) return;
 
     const pending = new Set(remaining);
